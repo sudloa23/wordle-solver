@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Cell{
     private char realLetter;
-    private char inputLetter = 'x';
+    private char inputLetter = ' ';
     private int id;
     private Color color = Color.GRAY;
     private Color textColor = Color.WHITE;
@@ -40,22 +40,33 @@ public class Cell{
         inputLetter = e.getKeyChar();
     }
 
-    public void checkLetter(char[] word, char letter){
-        List<Character> wordList = Arrays.toString(word).chars().mapToObj(c -> (char)c).toList();
+    public void checkLetter(char[] word, char letter) {
+        letter = Character.toUpperCase(this.inputLetter);
 
-        inputLetter = letter;
-        if(letter == realLetter){
+        int pos = id % 5;
+
+        System.out.println("checking Letter: " + letter + " at position " + pos + ", should be: " + word[pos]);
+
+        if (letter == word[pos]){
             color = Color.GREEN;
-            // add return for information bit calculation
-        }else if(word[id%5] != letter && wordList.contains(letter)){
-            color = Color.YELLOW;
-            // add return for information bit calculation
-        }else if(word[id%5] != letter && !wordList.contains(letter)){
-            color = Color.RED;
-            // add return for information bit calculation
+            System.out.println("green " + pos);
+            return;
         }
 
+        boolean exists = false;
+        for (char c : word) {
+            if (c == letter) { exists = true; break; }
+        }
+
+        if (exists) {
+            color = Color.ORANGE;
+            System.out.println("yellow " + pos);
+        } else {
+            color = Color.BLACK;
+            System.out.println("black " + pos);
+        }
     }
+
 
     public int getId(){
         return id;

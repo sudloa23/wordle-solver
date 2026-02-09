@@ -19,6 +19,7 @@ public class Game{
     private int cellAmount =25;
     private int currentCellIndex = 0;
     private List<String> possibleWords = new ArrayList<>();
+    private int fourCounter = 1;
 
     public Game(){
         initGame();
@@ -56,6 +57,8 @@ public class Game{
         for(int i = 0; i < cellAmount; i++){
             cells.add(new Cell(word[i % 5], i));
         }
+
+        System.out.println("word: " + Arrays.toString(word));
     }
 
     public void draw(Graphics2D g2d){
@@ -70,40 +73,46 @@ public class Game{
 
     public void handleKey(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE && currentCellIndex % 5 != 0) {
+
             System.out.println("delete -> " + currentCellIndex);
-            if(currentCellIndex % 5 == 4){
+            if(currentCellIndex % 5 == 4 && fourCounter == 1){
                 cells.get(currentCellIndex).update(e);
-                currentCellIndex--;
+                fourCounter = 0;
                 return;
             }
             if (currentCellIndex > 0){
                 currentCellIndex--;
                 cells.get(currentCellIndex).update(e);
+                fourCounter = 1;
             } else if(currentCellIndex == 0){
                 cells.get(0).update(e);
             }
             return;
-        }else if(currentCellIndex % 5 == 4 && e.getKeyCode() != KeyEvent.VK_ENTER){
-            cells.get(currentCellIndex).update(e);
-            return;
-        }else if (e.getKeyCode() == KeyEvent.VK_ENTER && cells.get(currentCellIndex).getInputLetter() != 'x'){
+        }else if (e.getKeyCode() == KeyEvent.VK_ENTER && cells.get(currentCellIndex).getInputLetter() != ' '){
             int rowStart = (currentCellIndex / 5) * 5;
             int rowEnd = rowStart + 5;
-            List<Character> wordAsList = new ArrayList<>();
-            for(int i = rowStart; i < rowEnd; i++){
-                wordAsList.add(cells.get(i).getInputLetter());
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = rowStart; i < rowEnd; i++) {
+                sb.append(cells.get(i).getInputLetter());
             }
-            String wordChar = wordAsList.toString();
-            if(!possibleWords.contains(wordChar)){
-                System.out.println("not a word bucko");
+            String guess = sb.toString();
+            guess = guess.toUpperCase();
+
+            if (!possibleWords.contains(guess)) {
+                System.out.println("not a word bucko: " + guess);
                 return;
             }
+
 
             for (int i = rowStart; i < rowEnd; i++) {
                 cells.get(i).checkLetter(word, cells.get(i).getInputLetter());
             }
 
             currentCellIndex++;
+            return;
+        }else if(currentCellIndex % 5 == 4 && e.getKeyCode() != KeyEvent.VK_ENTER){
+            cells.get(currentCellIndex).update(e);
             return;
         }else if(currentCellIndex < 25){
             cells.get(currentCellIndex).update(e);

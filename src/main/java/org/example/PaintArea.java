@@ -22,8 +22,21 @@ public class PaintArea extends JPanel{
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {
-                game.handleKey(e);
+            public void keyPressed(KeyEvent e){
+                int keyCode = e.getKeyCode();
+                char keyChar = e.getKeyChar();
+
+                if(keyCode == KeyEvent.VK_ENTER){
+                    game.handleKey(e);
+                }
+
+                if(keyCode == KeyEvent.VK_BACK_SPACE){
+                    game.handleKey(e);
+                }
+
+                if(Character.isLetter(keyChar)){
+                    game.handleKey(e);
+                }
             }
 
             @Override
