@@ -1,11 +1,12 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Letter{
-    private static Character letter;
-    private List<Integer> greenPos;
-    private List<Integer> yellowPos;
+    private Character letter;
+    private List<Integer> greenPos = new ArrayList();
+    private List<Integer> yellowPos = new ArrayList<>();
     private boolean black;
 
     public Letter(Character letter){
@@ -38,5 +39,9 @@ public class Letter{
 
     public void setBlack(boolean black) {
         this.black = black;
+    }
+
+    public void setLetter(Character letter) {
+        this.letter = letter;
     }
 }

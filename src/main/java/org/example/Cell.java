@@ -46,11 +46,8 @@ public class Cell{
 
         int pos = id % 5;
 
-        System.out.println("checking Letter: " + letter + " at position " + pos + ", should be: " + word[pos]);
-
         if (letter == word[pos]){
             color = Color.GREEN;
-            System.out.println("green " + pos);
             answerIdentifier = 'g';
             return;
         }
@@ -62,11 +59,9 @@ public class Cell{
 
         if (exists) {
             color = Color.ORANGE;
-            System.out.println("yellow " + pos);
             answerIdentifier = 'y';
         } else {
             color = Color.BLACK;
-            System.out.println("black " + pos);
             answerIdentifier = 'b';
         }
     }

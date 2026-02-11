@@ -56,4 +56,8 @@ public class PaintArea extends JPanel{
         game.update();
         game.draw(g2d);
     }
+
+    public Game getGame(){
+        return game;
+    }
 }

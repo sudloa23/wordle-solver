@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.swing.*;
+import java.util.HashMap;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +10,8 @@ public class Main {
         PaintArea paintArea = new PaintArea(game);
         Frame frame = new Frame(paintArea);
         frame.setVisible(true);
+        Calculations calculations = new Calculations();
+
 
         paintArea.requestFocusInWindow();
     }

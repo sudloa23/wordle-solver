@@ -6,6 +6,7 @@ public class Frame extends JFrame{
     private int height =1000;
     private int width =1000;
     private String Title = "wordle";
+    private Calculations calculations = new Calculations();
 
     private PaintArea paintArea;
 
@@ -21,5 +22,14 @@ public class Frame extends JFrame{
         Timer timer = new Timer(20, (e -> paintArea.repaint()));
 
         timer.start();
+
+
+
+        Timer timer1 = new Timer(20, (e -> {
+            calculations.updateLetters(paintArea.getGame().getLetters());
+            calculations.removeLetters();
+        }));
+
+        timer1.start();
     }
 }

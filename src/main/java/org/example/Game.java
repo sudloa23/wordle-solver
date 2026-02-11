@@ -115,26 +115,27 @@ public class Game{
                 cells.get(i).checkLetter(word, cells.get(i).getInputLetter());
                 Character upperChar = Character.toUpperCase(cells.get(i).getInputLetter());
                 Letter letter = new Letter((upperChar));
+                System.out.println("new Letter at " + i + " letter: " + letter.getLetter());
 
                 if(cells.get(i).getAnswerIdentifier() == 'b'){
                     letter.setBlack(true);
                     letters.put(i, letter);
-                    System.out.println("added " + letter + " to letters this char is black");
+                    System.out.println(letter.getLetter() + " black");
                 }else if(cells.get(i).getAnswerIdentifier() == 'g'){
                     letter.setBlack(false);
                     letter.addGreenPos(i%5);
                     letters.put(i, letter);
-                    System.out.println("added " + letter + " to letters this char is green at position " + i%5);
+                    System.out.println(letter.getLetter() + "green at position " + i%5);
                 }else if(cells.get(i).getAnswerIdentifier() == 'y'){
                     letter.setBlack(false);
                     letter.addYellowPos(i%5);
                     letters.put(i, letter);
-                    System.out.println("added " + letter + " to letters this char is yellow at position " + i%5);
+                    System.out.println(letter.getLetter() + " yellow at position " + i%5);
                 }
             }
 
-            for(int i = 0; i < letters.size(); i++){
-                System.out.println("field " + i + ": " + letters.get(i));
+            for(int j = 0; j < letters.size(); j++){
+                System.out.println(letters.get(j).getLetter() + " key: " + j + " Black: " + letters.get(j).isBlack());
             }
 
             currentCellIndex++;
@@ -153,7 +154,7 @@ public class Game{
         return cells;
     }
 
-    public HashMap<Integer, Cell> getColors(){
-        return colors;
+    public HashMap<Integer, Letter> getLetters(){
+        return letters;
     }
 }
