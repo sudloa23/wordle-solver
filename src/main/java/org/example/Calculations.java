@@ -25,7 +25,7 @@ public class Calculations {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line;
             while((line = br.readLine()) != null){
-                words.add(line);
+                words.add(line.toUpperCase());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -41,6 +41,7 @@ public class Calculations {
         blackLetters.clear();
         greenLetters.clear();
         yellowLetters.clear();
+
 
         for (Letter gl : gameLetters.values()) {
             letters.put(gl.getLetter(), gl);
@@ -115,7 +116,7 @@ public class Calculations {
 
 
     public void calculateBit(){
-
+        //calculate in bits of Information
     }
 
     public void calculateProbability(){
