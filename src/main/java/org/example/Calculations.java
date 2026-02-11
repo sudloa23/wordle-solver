@@ -37,37 +37,82 @@ public class Calculations {
     }
 
     public void updateLetters(HashMap<Integer, Letter> gameLetters){
-        for(int i = 0; i < gameLetters.size(); i++){
-            letters.put(gameLetters.get(i).getLetter(), gameLetters.get(i));
+        // optional: Listen/Maps leeren, sonst sammelst du Müll aus alten Runden
+        blackLetters.clear();
+        greenLetters.clear();
+        yellowLetters.clear();
 
-            if(letters.get(gameLetters.get(i).getLetter()).isBlack()){
-                blackLetters.add(gameLetters.get(i).getLetter());
-            }
+        for (Letter gl : gameLetters.values()) {
+            letters.put(gl.getLetter(), gl);
 
-            if(letters.get(gameLetters.get(i).getLetter()).getGreenPos() != null){
-                greenLetters.put(gameLetters.get(i).getLetter(), gameLetters.get(i));
-            }
-
-            if(letters.get(gameLetters.get(i).getLetter()).getYellowPos() != null){
-                yellowLetters.put(gameLetters.get(i).getLetter(), gameLetters.get(i));
-            }
+            if (gl.isBlack()) blackLetters.add(gl.getLetter());
+            if (gl.getGreenPos() != null && !gl.getGreenPos().isEmpty()) greenLetters.put(gl.getLetter(), gl);
+            if (gl.getYellowPos() != null && !gl.getYellowPos().isEmpty()) yellowLetters.put(gl.getLetter(), gl);
         }
     }
 
-    public void removeBlack(){
-        for(int i = 0; i < words.size(); i++){
-            for(int j = i + 1; j < blackLetters.size(); j++){
-                if(words.get(i).contains(String.valueOf(blackLetters.get(j)))){
+
+    public void removeBlack() {
+        for (int i = 0; i < words.size(); i++) {
+            String w = words.get(i);
+
+            for (int j = 0; j < blackLetters.size(); j++) {
+                if (w.contains(String.valueOf(blackLetters.get(j)))) {
+                    System.out.println("removed black: " + w);
                     words.remove(i);
-                    System.out.println("word: " + words.get(i) + " removed");
+                    i--;
+                    break;
                 }
             }
         }
     }
 
-    public void removeYellow(){
 
+    public void removeYellow() {
+        for (int i = 0; i < words.size(); i++) {
+            String w = words.get(i);
+            boolean remove = false;
+            char letter = '#';
+
+            for (Letter l : yellowLetters.values()) {
+                if (yellowCheck(w.toCharArray(), l)) {
+                    letter = l.getLetter();
+                    remove = true;
+                    break;
+                }else if(!w.contains(String.valueOf(yellowLetters.get(l.getLetter()).getLetter()))){
+                    letter = l.getLetter();
+                    remove = true;
+                    break;
+                }
+            }
+
+            if(remove){
+                System.out.println("removed yellow "+ letter + ": " + w);
+                words.remove(i);
+                i--;
+            }
+        }
     }
+
+    public void removeGreen(){
+        for (int i = 0; i < words.size(); i++) {
+            String w = words.get(i);
+            boolean remove = false;
+
+            for (Letter l : greenLetters.values()) {
+                if(!w.contains(String.valueOf(greenLetters.get(l.getLetter()).getLetter()))){
+                    remove = true;
+                    break;
+                }
+            }
+
+            if(remove){
+                System.out.println("remove green: " + w);
+                words.remove(i);
+            }
+        }
+    }
+
 
     public void calculateBit(){
 
@@ -77,9 +122,9 @@ public class Calculations {
 
     }
 
-    public boolean yellowCheck(List<Integer> positions, char[] word){
-        for(int i = 0; i < yellowLetters.size(); i++){
-            if(word[positions.get(i)] == yellowLetters.get(i).getLetter()){
+    public boolean yellowCheck(char[] word, Letter letter){
+        for(int i = 0; i < letter.getYellowPos().size(); i++){
+            if(word[letter.getYellowPos().get(i)] == letter.getLetter()){
                 return true;
             }
         }
@@ -89,5 +134,7 @@ public class Calculations {
 
     public void removeLetters(){
         removeBlack();
+        removeYellow();
+        removeGreen();
     }
 }
