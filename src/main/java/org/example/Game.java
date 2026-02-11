@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -20,6 +21,7 @@ public class Game{
     private int currentCellIndex = 0;
     private List<String> possibleWords = new ArrayList<>();
     private int fourCounter = 1;
+    private HashMap<Integer, Letter> letters = new HashMap<>();
 
     public Game(){
         initGame();
@@ -44,7 +46,7 @@ public class Game{
             BufferedReader br = new BufferedReader(new InputStreamReader(is2));
             String line;
             while((line = br.readLine()) != null){
-                possibleWords.add(line);
+                possibleWords.add(line.toUpperCase());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -72,9 +74,13 @@ public class Game{
     }
 
     public void handleKey(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE && currentCellIndex % 5 != 0) {
+        if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
 
-            System.out.println("delete -> " + currentCellIndex);
+            if(currentCellIndex % 5 == 0){
+                return;
+            }
+
+            System.out.println("delete slot -> " + currentCellIndex%5);
             if(currentCellIndex % 5 == 4 && fourCounter == 1){
                 cells.get(currentCellIndex).update(e);
                 fourCounter = 0;
@@ -100,13 +106,35 @@ public class Game{
             guess = guess.toUpperCase();
 
             if (!possibleWords.contains(guess)) {
-                System.out.println("not a word bucko: " + guess);
+                System.out.println("not a word: " + guess);
                 return;
             }
 
 
             for (int i = rowStart; i < rowEnd; i++) {
                 cells.get(i).checkLetter(word, cells.get(i).getInputLetter());
+                Character upperChar = Character.toUpperCase(cells.get(i).getInputLetter());
+                Letter letter = new Letter((upperChar));
+
+                if(cells.get(i).getAnswerIdentifier() == 'b'){
+                    letter.setBlack(true);
+                    letters.put(i, letter);
+                    System.out.println("added " + letter + " to letters this char is black");
+                }else if(cells.get(i).getAnswerIdentifier() == 'g'){
+                    letter.setBlack(false);
+                    letter.addGreenPos(i%5);
+                    letters.put(i, letter);
+                    System.out.println("added " + letter + " to letters this char is green at position " + i%5);
+                }else if(cells.get(i).getAnswerIdentifier() == 'y'){
+                    letter.setBlack(false);
+                    letter.addYellowPos(i%5);
+                    letters.put(i, letter);
+                    System.out.println("added " + letter + " to letters this char is yellow at position " + i%5);
+                }
+            }
+
+            for(int i = 0; i < letters.size(); i++){
+                System.out.println("field " + i + ": " + letters.get(i));
             }
 
             currentCellIndex++;
@@ -119,5 +147,13 @@ public class Game{
             currentCellIndex++;
             return;
         }
+    }
+
+    public List<Cell> getCells(){
+        return cells;
+    }
+
+    public HashMap<Integer, Cell> getColors(){
+        return colors;
     }
 }

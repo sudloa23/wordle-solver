@@ -21,11 +21,12 @@ public class Cell{
     private Color textColor = Color.WHITE;
     private int width = 50, height = 50;
     private int x, y;
+    private char answerIdentifier;
 
     public Cell(char realLetter, int id){
         this.realLetter = realLetter;
         this.id = id;
-        x = ((id % 5) * 75) + 250;
+        x = ((id % 5) * 55) + 250;
         y = ((id / 5) * 75) + 50;
     }
 
@@ -50,6 +51,7 @@ public class Cell{
         if (letter == word[pos]){
             color = Color.GREEN;
             System.out.println("green " + pos);
+            answerIdentifier = 'g';
             return;
         }
 
@@ -61,9 +63,11 @@ public class Cell{
         if (exists) {
             color = Color.ORANGE;
             System.out.println("yellow " + pos);
+            answerIdentifier = 'y';
         } else {
             color = Color.BLACK;
             System.out.println("black " + pos);
+            answerIdentifier = 'b';
         }
     }
 
@@ -74,5 +78,9 @@ public class Cell{
 
     public char getInputLetter(){
         return inputLetter;
+    }
+
+    public char getAnswerIdentifier(){
+        return answerIdentifier;
     }
 }

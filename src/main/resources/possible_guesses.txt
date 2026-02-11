@@ -341,6 +341,7 @@ CRAMP
 CRANE
 CRANK
 CRASS
+CRASH
 CRATE
 CRAVE
 CRAWL
@@ -3618,6 +3619,7 @@ crewe
 crews
 crias
 cribs
+cried
 cries
 crims
 crine
@@ -4937,6 +4939,7 @@ frier
 fries
 frigs
 frise
+frisk
 frist
 frith
 frits
@@ -5211,6 +5214,7 @@ ginks
 ginny
 ginzo
 gipon
+gipsy
 gippo
 gippy
 girds
@@ -7446,6 +7450,7 @@ mises
 misgo
 misos
 missa
+missy
 mists
 misty
 mitch
