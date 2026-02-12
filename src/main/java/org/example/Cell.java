@@ -78,4 +78,8 @@ public class Cell{
     public char getAnswerIdentifier(){
         return answerIdentifier;
     }
+
+    public void setInputLetter(char inputLetter){
+        this.inputLetter = inputLetter;
+    }
 }

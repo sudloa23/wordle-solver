@@ -22,6 +22,7 @@ public class Game{
     private List<String> possibleWords = new ArrayList<>();
     private int fourCounter = 1;
     private HashMap<Integer, Letter> letters = new HashMap<>();
+    private HashMap<Character, DisplayLetter> displayLetters = new HashMap<>();
 
     public Game(){
         initGame();
@@ -59,13 +60,23 @@ public class Game{
         for(int i = 0; i < cellAmount; i++){
             cells.add(new Cell(word[i % 5], i));
         }
+        int counter = 0;
+        for(char ch = 'A'; ch <= 'Z'; ch++){
+            int id = counter;
+            displayLetters.put(ch, new DisplayLetter(ch, id));
+            counter++;
+        }
 
         System.out.println("word: " + Arrays.toString(word));
     }
 
     public void draw(Graphics2D g2d){
+
         for(int i = 0; i < cells.size(); i++){
             cells.get(i).draw(g2d);
+        }
+        for(char ch = 'A'; ch <= 'Z'; ch++){
+            displayLetters.get(ch).draw(g2d);
         }
     }
 
@@ -84,8 +95,10 @@ public class Game{
             if(currentCellIndex % 5 == 4 && fourCounter == 1){
                 cells.get(currentCellIndex).update(e);
                 fourCounter = 0;
+                cells.get(currentCellIndex).setInputLetter(' ');
                 return;
             }
+
             if (currentCellIndex > 0){
                 currentCellIndex--;
                 cells.get(currentCellIndex).update(e);
@@ -93,6 +106,7 @@ public class Game{
             } else if(currentCellIndex == 0){
                 cells.get(0).update(e);
             }
+            cells.get(currentCellIndex).setInputLetter(' ');
             return;
         }else if (e.getKeyCode() == KeyEvent.VK_ENTER && cells.get(currentCellIndex).getInputLetter() != ' '){
             int rowStart = (currentCellIndex / 5) * 5;
@@ -110,27 +124,26 @@ public class Game{
                 return;
             }
 
-
             for (int i = rowStart; i < rowEnd; i++) {
                 cells.get(i).checkLetter(word, cells.get(i).getInputLetter());
                 Character upperChar = Character.toUpperCase(cells.get(i).getInputLetter());
                 Letter letter = new Letter((upperChar));
-                System.out.println("new Letter at " + i + " letter: " + letter.getLetter());
 
                 if(cells.get(i).getAnswerIdentifier() == 'b'){
                     letter.setBlack(true);
                     letters.put(i, letter);
                     System.out.println(letter.getLetter() + " black");
+                    displayLetters.get(letter.getLetter()).update('b');
                 }else if(cells.get(i).getAnswerIdentifier() == 'g'){
                     letter.setBlack(false);
                     letter.addGreenPos(i%5);
                     letters.put(i, letter);
-                    System.out.println(letter.getLetter() + "green at position " + i%5);
+                    displayLetters.get(letter.getLetter()).update('g');
                 }else if(cells.get(i).getAnswerIdentifier() == 'y'){
                     letter.setBlack(false);
                     letter.addYellowPos(i%5);
                     letters.put(i, letter);
-                    System.out.println(letter.getLetter() + " yellow at position " + i%5);
+                    displayLetters.get(letter.getLetter()).update('y');
                 }
             }
 

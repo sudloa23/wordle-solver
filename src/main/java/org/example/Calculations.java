@@ -117,6 +117,7 @@ public class Calculations {
 
     public void calculateBit(){
         //calculate in bits of Information
+
     }
 
     public void calculateProbability(){
