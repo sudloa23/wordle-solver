@@ -16,6 +16,7 @@ public class Calculations {
     private List<Character> blackLetters = new ArrayList<>();
     private HashMap<Character, Letter> greenLetters = new HashMap<>();
     private HashMap<Character, Letter> yellowLetters = new HashMap<>();
+    private List<String> calcList = new ArrayList<>();
 
     public Calculations(){
         InputStream is = Calculations.class.getResourceAsStream("/possible_guesses.txt");
@@ -34,6 +35,7 @@ public class Calculations {
         for(char ch = 'A'; ch <= 'Z'; ch++){
             letters.put(ch, new Letter(ch));
         }
+        calcList.addAll(words);
     }
 
     public void updateLetters(HashMap<Integer, Letter> gameLetters){
@@ -54,7 +56,7 @@ public class Calculations {
 
 
     public void removeBlack() {
-        for (int i = 0; i < words.size(); i++) {
+        for (int i = 0; i < words.size(); i++){
             String w = words.get(i);
 
             for (int j = 0; j < blackLetters.size(); j++) {
@@ -67,7 +69,6 @@ public class Calculations {
             }
         }
     }
-
 
     public void removeYellow() {
         for (int i = 0; i < words.size(); i++) {
@@ -115,9 +116,37 @@ public class Calculations {
     }
 
 
-    public void calculateBit(){
-        //calculate in bits of Information
+    public void calculateEntropy(){
 
+        for(int i = 0; i < calcList.size(); i++){
+            calcList.clear();
+            calcList.addAll(words);
+
+
+        }
+    }
+
+    public Float calculateAllBits(String word){
+        char[] wordChars = word.toCharArray();
+        List<Float> bitList = new ArrayList<>();
+        float sum = 0.0f;
+        float entropy;
+        double probability;
+
+
+        for(int i = 0; i < Math.pow(3, 5); i++){
+
+
+            probability = (double) calcList.size() / words.size();
+            bitList.add((float) (-1 * (Math.log(probability) / Math.log(2))));
+        }
+
+        for(float num : bitList){
+            sum += num;
+        }
+        entropy = sum / (float) bitList.size();
+
+        return entropy;
     }
 
     public void calculateProbability(){

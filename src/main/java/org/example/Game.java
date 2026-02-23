@@ -49,7 +49,7 @@ public class Game{
             while((line = br.readLine()) != null){
                 possibleWords.add(line.toUpperCase());
             }
-        } catch (IOException e) {
+        } catch (IOException e){
             throw new RuntimeException(e);
         }
 
@@ -86,28 +86,19 @@ public class Game{
 
     public void handleKey(KeyEvent e){
         if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+            int rowStart = (currentCellIndex / 5) * 5;
+            int rowEnd = rowStart + 5;
 
-            if(currentCellIndex % 5 == 0){
-                return;
+            for(int i = rowEnd; i >= rowStart; i--){
+                if(cells.get(i).getInputLetter() != ' '){
+                    cells.get(i).setInputLetter(' ');
+                    if(currentCellIndex != rowStart){
+                        currentCellIndex--;
+                    }
+                    return;
+                }
             }
 
-            System.out.println("delete slot -> " + currentCellIndex%5);
-            if(currentCellIndex % 5 == 4 && fourCounter == 1){
-                cells.get(currentCellIndex).update(e);
-                fourCounter = 0;
-                cells.get(currentCellIndex).setInputLetter(' ');
-                return;
-            }
-
-            if (currentCellIndex > 0){
-                currentCellIndex--;
-                cells.get(currentCellIndex).update(e);
-                fourCounter = 1;
-            } else if(currentCellIndex == 0){
-                cells.get(0).update(e);
-            }
-            cells.get(currentCellIndex).setInputLetter(' ');
-            return;
         }else if (e.getKeyCode() == KeyEvent.VK_ENTER && cells.get(currentCellIndex).getInputLetter() != ' '){
             int rowStart = (currentCellIndex / 5) * 5;
             int rowEnd = rowStart + 5;
@@ -145,10 +136,6 @@ public class Game{
                     letters.put(i, letter);
                     displayLetters.get(letter.getLetter()).update('y');
                 }
-            }
-
-            for(int j = 0; j < letters.size(); j++){
-                System.out.println(letters.get(j).getLetter() + " key: " + j + " Black: " + letters.get(j).isBlack());
             }
 
             currentCellIndex++;

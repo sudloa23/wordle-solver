@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="small calculation fixes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/DisplayLetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="addedLetterList + small fixes with delete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DisplayLetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DisplayLetter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +93,13 @@
       <workItem from="1770361593120" duration="52467000" />
       <workItem from="1770880043781" duration="30000" />
       <workItem from="1770880080590" duration="1059000" />
-      <workItem from="1770891854178" duration="6305000" />
+      <workItem from="1770891854178" duration="9588000" />
+      <workItem from="1770965695600" duration="1104000" />
+      <workItem from="1770972522518" duration="713000" />
+      <workItem from="1771402195938" duration="3762000" />
+      <workItem from="1771429380413" duration="9000" />
+      <workItem from="1771431032403" duration="1046000" />
+      <workItem from="1771829534878" duration="6931000" />
     </task>
     <task id="LOCAL-00001" summary="visuallisation + logic fixes">
       <option name="closed" value="true" />
@@ -146,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1770806699287</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="addedLetterList + small fixes with delete">
+      <option name="closed" value="true" />
+      <created>1770898889672</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1770898889672</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +173,7 @@
     <MESSAGE value="removeBlack works and started on yellowCheck" />
     <MESSAGE value="finished all removing mmethods (black,green,yellow)" />
     <MESSAGE value="small calculation fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="small calculation fixes" />
+    <MESSAGE value="addedLetterList + small fixes with delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="addedLetterList + small fixes with delete" />
   </component>
 </project>

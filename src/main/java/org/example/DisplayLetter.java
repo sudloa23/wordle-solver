@@ -8,6 +8,7 @@ public class DisplayLetter{
     private int id;
     private Color color;
     private Color textColor;
+    private boolean black;
 
     public DisplayLetter(Character letter, int id){
         this.letter = letter;
@@ -29,9 +30,10 @@ public class DisplayLetter{
     public void update(char state){
         if(state == 'b'){
             color = Color.BLACK;
-        }else if(state == 'g'){
+        }else if(state == 'g' && black == false){
+            black = true;
             color = Color.GREEN;
-        }else if(state == 'y'){
+        }else if(state == 'y' && black == false){
             color = Color.ORANGE;
         }
     }
