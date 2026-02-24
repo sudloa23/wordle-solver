@@ -6,9 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Calculations {
     private List<String> words = new ArrayList<>();
@@ -18,6 +16,7 @@ public class Calculations {
     private HashMap<Character, Letter> yellowLetters = new HashMap<>();
     private List<String> calcList = new ArrayList<>();
     private List<String> allPatterns = new ArrayList<>(243);
+    private HashMap<String,Float> entropies = new HashMap<>();
 
     public Calculations(){
         InputStream is = Calculations.class.getResourceAsStream("/possible_guesses.txt");
@@ -128,10 +127,16 @@ public class Calculations {
     }
 
     public void calculateEntropy(){
+        float entropy;
         for(int i = 0; i < words.size(); i++){
-            calculateAllBits(words.get(i));
-            System.out.println("entropy of " + words.get(i) + ": ");
+            entropy = calculateAllBits(words.get(i));
+            System.out.println("entropy of " + words.get(i) + ": " + entropy);
+            entropies.put(words.get(i), entropy);
         }
+        Map.Entry<String, Float> maxEntry = Collections.max(entropies.entrySet(), Map.Entry.comparingByValue());
+
+
+        System.out.println("highest Entropy: " + maxEntry.getKey() + " - " + maxEntry.getValue());
     }
 
     public Float calculateAllBits(String guess) {
@@ -165,7 +170,6 @@ public class Calculations {
             freq[a[i] - 'A']++;
         }
 
-        // Greens
         for (int i = 0; i < 5; i++) {
             if (g[i] == a[i]) {
                 res[i] = 'G';
@@ -173,7 +177,6 @@ public class Calculations {
             }
         }
 
-        // Yellows
         for (int i = 0; i < 5; i++) {
             if (res[i] == 'G') continue;
             int idx = g[i] - 'A';

@@ -12,7 +12,7 @@ public class Frame extends JFrame{
 
     public Frame(PaintArea paintArea){
         this.paintArea = paintArea;
-        //paintArea.setCalcForGame(calculations);
+        paintArea.setCalcForGame(calculations);
 
         setTitle(Title);
         setSize(width,height);
