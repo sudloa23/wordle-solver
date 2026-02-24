@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="working wordle without bit calc implemented fixed absolute paths">
+    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="+ entropy calculation (on the same thread takes a while)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/possible_guesses.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/possible_guesses.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "sudloa23"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/sudloa23/wordle-solver",
+    "accountId": "12ac70db-1be7-4285-b68e-bad5b2d5c361"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -101,7 +113,7 @@
       <workItem from="1771431032403" duration="1046000" />
       <workItem from="1771829534878" duration="9624000" />
       <workItem from="1771843726260" duration="150000" />
-      <workItem from="1771915642438" duration="9413000" />
+      <workItem from="1771915642438" duration="12396000" />
     </task>
     <task id="LOCAL-00001" summary="visuallisation + logic fixes">
       <option name="closed" value="true" />
@@ -175,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771923792143</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="+ entropy calculation (on the same thread takes a while)">
+      <option name="closed" value="true" />
+      <created>1771925672511</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1771925672511</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,7 +215,8 @@
     <MESSAGE value="progress with Calculations" />
     <MESSAGE value="working wordle without bit calc implemented" />
     <MESSAGE value="working wordle without bit calc implemented fixed absolute paths" />
-    <option name="LAST_COMMIT_MESSAGE" value="working wordle without bit calc implemented fixed absolute paths" />
+    <MESSAGE value="+ entropy calculation (on the same thread takes a while)" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ entropy calculation (on the same thread takes a while)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

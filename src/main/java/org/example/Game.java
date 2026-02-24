@@ -24,6 +24,7 @@ public class Game{
     private HashMap<Integer, Letter> letters = new HashMap<>();
     private HashMap<Character, DisplayLetter> displayLetters = new HashMap<>();
     private Calculations calculations;
+    private boolean win = false;
 
     public Game(){
         initGame();
@@ -81,6 +82,10 @@ public class Game{
         for(char ch = 'A'; ch <= 'Z'; ch++){
             displayLetters.get(ch).draw(g2d);
         }
+        if(win){
+            g2d.setColor(Color.GREEN);
+            g2d.drawString("YOU WON", 350, 30);
+        }
     }
 
     public void update(){
@@ -88,68 +93,74 @@ public class Game{
     }
 
     public void handleKey(KeyEvent e){
-        if(e.getKeyCode() == KeyEvent.VK_BACK_SPACE){
-            int rowStart = (currentCellIndex / 5) * 5;
-            int rowEnd = rowStart + 5;
+        if(win == false) {
+            if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
+                int rowStart = (currentCellIndex / 5) * 5;
+                int rowEnd = rowStart + 5;
 
-            for(int i = rowEnd; i >= rowStart; i--){
-                if(cells.get(i).getInputLetter() != ' '){
-                    cells.get(i).setInputLetter(' ');
-                    if(currentCellIndex != rowStart){
-                        currentCellIndex--;
+                for (int i = rowEnd; i >= rowStart; i--) {
+                    if (cells.get(i).getInputLetter() != ' ') {
+                        cells.get(i).setInputLetter(' ');
+                        if (currentCellIndex != rowStart) {
+                            currentCellIndex--;
+                        }
+                        return;
                     }
+                }
+
+            } else if (e.getKeyCode() == KeyEvent.VK_ENTER && cells.get(currentCellIndex).getInputLetter() != ' ') {
+                int rowStart = (currentCellIndex / 5) * 5;
+                int rowEnd = rowStart + 5;
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = rowStart; i < rowEnd; i++) {
+                    sb.append(cells.get(i).getInputLetter());
+                }
+                String guess = sb.toString();
+                guess = guess.toUpperCase();
+
+                if (!possibleWords.contains(guess)) {
+                    System.out.println("not a word: " + guess);
                     return;
                 }
-            }
 
-        }else if (e.getKeyCode() == KeyEvent.VK_ENTER && cells.get(currentCellIndex).getInputLetter() != ' '){
-            int rowStart = (currentCellIndex / 5) * 5;
-            int rowEnd = rowStart + 5;
+                for (int i = rowStart; i < rowEnd; i++) {
+                    cells.get(i).checkLetter(word, cells.get(i).getInputLetter());
+                    Character upperChar = Character.toUpperCase(cells.get(i).getInputLetter());
+                    Letter letter = new Letter((upperChar));
 
-            StringBuilder sb = new StringBuilder();
-            for (int i = rowStart; i < rowEnd; i++) {
-                sb.append(cells.get(i).getInputLetter());
-            }
-            String guess = sb.toString();
-            guess = guess.toUpperCase();
+                    if (cells.get(i).getAnswerIdentifier() == 'b') {
+                        letter.setBlack(true);
+                        letters.put(i, letter);
+                        System.out.println(letter.getLetter() + " black");
+                        displayLetters.get(letter.getLetter()).update('b');
+                    } else if (cells.get(i).getAnswerIdentifier() == 'g') {
+                        letter.setBlack(false);
+                        letter.addGreenPos(i % 5);
+                        letters.put(i, letter);
+                        displayLetters.get(letter.getLetter()).update('g');
+                    } else if (cells.get(i).getAnswerIdentifier() == 'y') {
+                        letter.setBlack(false);
+                        letter.addYellowPos(i % 5);
+                        letters.put(i, letter);
+                        displayLetters.get(letter.getLetter()).update('y');
+                    }
+                }
 
-            if (!possibleWords.contains(guess)) {
-                System.out.println("not a word: " + guess);
+                if (checkWin(rowStart, rowEnd)) {
+                    win = true;
+                }
+
+                currentCellIndex++;
+                return;
+            } else if (currentCellIndex % 5 == 4 && e.getKeyCode() != KeyEvent.VK_ENTER) {
+                cells.get(currentCellIndex).update(e);
+                return;
+            } else if (currentCellIndex < 25) {
+                cells.get(currentCellIndex).update(e);
+                currentCellIndex++;
                 return;
             }
-
-            for (int i = rowStart; i < rowEnd; i++) {
-                cells.get(i).checkLetter(word, cells.get(i).getInputLetter());
-                Character upperChar = Character.toUpperCase(cells.get(i).getInputLetter());
-                Letter letter = new Letter((upperChar));
-
-                if(cells.get(i).getAnswerIdentifier() == 'b'){
-                    letter.setBlack(true);
-                    letters.put(i, letter);
-                    System.out.println(letter.getLetter() + " black");
-                    displayLetters.get(letter.getLetter()).update('b');
-                }else if(cells.get(i).getAnswerIdentifier() == 'g'){
-                    letter.setBlack(false);
-                    letter.addGreenPos(i%5);
-                    letters.put(i, letter);
-                    displayLetters.get(letter.getLetter()).update('g');
-                }else if(cells.get(i).getAnswerIdentifier() == 'y'){
-                    letter.setBlack(false);
-                    letter.addYellowPos(i%5);
-                    letters.put(i, letter);
-                    displayLetters.get(letter.getLetter()).update('y');
-                }
-            }
-
-            currentCellIndex++;
-            return;
-        }else if(currentCellIndex % 5 == 4 && e.getKeyCode() != KeyEvent.VK_ENTER){
-            cells.get(currentCellIndex).update(e);
-            return;
-        }else if(currentCellIndex < 25){
-            cells.get(currentCellIndex).update(e);
-            currentCellIndex++;
-            return;
         }
     }
 
@@ -164,5 +175,25 @@ public class Game{
     public void setCalc(Calculations calculations){
         this.calculations = calculations;
         this.calculations.calculateEntropy();
+    }
+
+    public boolean checkWin(int start, int end){
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("cell " + start + ": " + cells.get(start).getAnswerIdentifier());
+        System.out.println("cell " + (start+1) + ": " + cells.get(start+1).getAnswerIdentifier());
+        System.out.println("cell " + (start+2) + ": " + cells.get(start+2).getAnswerIdentifier());
+        System.out.println("cell " + (start+3) + ": " + cells.get(start+3).getAnswerIdentifier());
+        System.out.println("cell " + (end-1) + ": " + cells.get(end-1).getAnswerIdentifier());
+
+        if(cells.get(start).getAnswerIdentifier() == 'g'
+        && cells.get(start+1).getAnswerIdentifier() == 'g'
+        && cells.get(start+2).getAnswerIdentifier() == 'g'
+        && cells.get(start+3).getAnswerIdentifier() == 'g'
+        && cells.get(end-1).getAnswerIdentifier() == 'g'){
+            win = true;
+            System.out.println("you won");
+        }
+
+        return false;
     }
 }
