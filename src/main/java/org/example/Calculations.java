@@ -1,5 +1,6 @@
 package org.example;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,6 +8,8 @@ import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Calculations {
     private List<String> words = new ArrayList<>();
@@ -17,6 +20,7 @@ public class Calculations {
     private List<String> calcList = new ArrayList<>();
     private List<String> allPatterns = new ArrayList<>(243);
     private HashMap<String,Float> entropies = new HashMap<>();
+    private HashMap<String, Float> top5 = new HashMap<>(5);
 
     public Calculations(){
         InputStream is = Calculations.class.getResourceAsStream("/possible_guesses.txt");
@@ -135,11 +139,12 @@ public class Calculations {
         }
         Map.Entry<String, Float> maxEntry = Collections.max(entropies.entrySet(), Map.Entry.comparingByValue());
 
+        top5 = entropies.entrySet().stream().sorted(Map.Entry.<String, Float>comparingByValue().reversed()).limit(5).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
         System.out.println("highest Entropy: " + maxEntry.getKey() + " - " + maxEntry.getValue());
     }
 
-    public Float calculateAllBits(String guess) {
+    public Float calculateAllBits(String guess){
         if (words == null || words.isEmpty()) return 0.0f;
 
         HashMap<String, Integer> patternCounts = new HashMap<>();
@@ -207,5 +212,13 @@ public class Calculations {
         removeBlack();
         removeYellow();
         removeGreen();
+    }
+
+    public void draw(Graphics2D g2d){
+        g2d.setColor(Color.BLACK);
+        for(int i = 0; i < top5.size(); i++){
+            g2d.drawString(String.valueOf(top5.get(i)), 900, (i*50)+ 200);
+            System.out.println(String.valueOf(top5.get(i)));
+        }
     }
 }

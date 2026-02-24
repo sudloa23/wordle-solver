@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="+ entropy calculation (on the same thread takes a while)">
+    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="win function (still slow)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/possible_guesses.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/possible_guesses.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +112,7 @@
       <workItem from="1771431032403" duration="1046000" />
       <workItem from="1771829534878" duration="9624000" />
       <workItem from="1771843726260" duration="150000" />
-      <workItem from="1771915642438" duration="12396000" />
+      <workItem from="1771915642438" duration="13836000" />
     </task>
     <task id="LOCAL-00001" summary="visuallisation + logic fixes">
       <option name="closed" value="true" />
@@ -195,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771925672511</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="win function (still slow)">
+      <option name="closed" value="true" />
+      <created>1771928688371</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1771928688371</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +223,8 @@
     <MESSAGE value="working wordle without bit calc implemented" />
     <MESSAGE value="working wordle without bit calc implemented fixed absolute paths" />
     <MESSAGE value="+ entropy calculation (on the same thread takes a while)" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ entropy calculation (on the same thread takes a while)" />
+    <MESSAGE value="win function (still slow)" />
+    <option name="LAST_COMMIT_MESSAGE" value="win function (still slow)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
