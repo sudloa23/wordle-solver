@@ -82,6 +82,7 @@ public class Game{
         for(char ch = 'A'; ch <= 'Z'; ch++){
             displayLetters.get(ch).draw(g2d);
         }
+        calculations.draw(g2d);
         if(win){
             g2d.setColor(Color.GREEN);
             g2d.drawString("YOU WON", 350, 30);

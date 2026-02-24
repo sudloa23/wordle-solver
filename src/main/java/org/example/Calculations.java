@@ -20,7 +20,9 @@ public class Calculations {
     private List<String> calcList = new ArrayList<>();
     private List<String> allPatterns = new ArrayList<>(243);
     private HashMap<String,Float> entropies = new HashMap<>();
-    private HashMap<String, Float> top5 = new HashMap<>(5);
+    private HashMap<String, Float> top5 = new HashMap<>();
+    private List<String> top5str = new ArrayList<>(5);
+    private List<Float> top5flo = new ArrayList<>(5);
 
     public Calculations(){
         InputStream is = Calculations.class.getResourceAsStream("/possible_guesses.txt");
@@ -140,6 +142,10 @@ public class Calculations {
         Map.Entry<String, Float> maxEntry = Collections.max(entropies.entrySet(), Map.Entry.comparingByValue());
 
         top5 = entropies.entrySet().stream().sorted(Map.Entry.<String, Float>comparingByValue().reversed()).limit(5).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        for(Map.Entry<String, Float> entry : top5.entrySet()){
+            top5str.add(entry.getKey());
+            top5flo.add(entry.getValue());
+        }
 
         System.out.println("highest Entropy: " + maxEntry.getKey() + " - " + maxEntry.getValue());
     }
@@ -217,8 +223,7 @@ public class Calculations {
     public void draw(Graphics2D g2d){
         g2d.setColor(Color.BLACK);
         for(int i = 0; i < top5.size(); i++){
-            g2d.drawString(String.valueOf(top5.get(i)), 900, (i*50)+ 200);
-            System.out.println(String.valueOf(top5.get(i)));
+            g2d.drawString(String.valueOf(top5str.get(i) + " -- " + top5flo.get(i)), 750, (i*50)+ 200);
         }
     }
 }
