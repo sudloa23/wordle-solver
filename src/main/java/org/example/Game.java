@@ -150,7 +150,12 @@ public class Game{
 
                 if (checkWin(rowStart, rowEnd)) {
                     win = true;
+                }else{
+                    calculations.removeWord(guess);
                 }
+                calculations.updateLetters(letters);
+                calculations.removeLetters();
+                calculations.calculateEntropy();
 
                 currentCellIndex++;
                 return;

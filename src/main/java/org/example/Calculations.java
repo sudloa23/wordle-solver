@@ -57,7 +57,6 @@ public class Calculations {
     }
 
     public void updateLetters(HashMap<Integer, Letter> gameLetters){
-        // optional: Listen/Maps leeren, sonst sammelst du Müll aus alten Runden
         blackLetters.clear();
         greenLetters.clear();
         yellowLetters.clear();
@@ -133,6 +132,11 @@ public class Calculations {
     }
 
     public void calculateEntropy(){
+        top5str.clear();
+        top5flo.clear();
+        top5.clear();
+        entropies.clear();
+        System.out.println("calculateEntropy called");
         float entropy;
         for(int i = 0; i < words.size(); i++){
             entropy = calculateAllBits(words.get(i));
@@ -220,9 +224,15 @@ public class Calculations {
     }
 
     public void removeLetters(){
+        System.out.println("removeLetters called");
         removeBlack();
         removeYellow();
         removeGreen();
+    }
+
+    public void removeWord(String word){
+        System.out.println("removed word: " + word);
+        words.remove(word);
     }
 
     public void draw(Graphics2D g2d){
