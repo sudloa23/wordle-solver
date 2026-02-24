@@ -17,6 +17,7 @@ public class Calculations {
     private HashMap<Character, Letter> greenLetters = new HashMap<>();
     private HashMap<Character, Letter> yellowLetters = new HashMap<>();
     private List<String> calcList = new ArrayList<>();
+    private List<String> allPatterns = new ArrayList<>(243);
 
     public Calculations(){
         InputStream is = Calculations.class.getResourceAsStream("/possible_guesses.txt");
@@ -36,6 +37,18 @@ public class Calculations {
             letters.put(ch, new Letter(ch));
         }
         calcList.addAll(words);
+        char[] states = {'B', 'Y', 'G'};
+
+        for (int n = 0; n < Math.pow(3, 5); n++) { // 3^5
+            int x = n;
+            char[] pat = new char[5];
+
+            for (int i = 4; i >= 0; i--) {
+                pat[i] = states[x % 3];
+                x /= 3;
+            }
+            allPatterns.add(new String(pat));
+        }
     }
 
     public void updateLetters(HashMap<Integer, Letter> gameLetters){
@@ -53,7 +66,6 @@ public class Calculations {
             if (gl.getYellowPos() != null && !gl.getYellowPos().isEmpty()) yellowLetters.put(gl.getLetter(), gl);
         }
     }
-
 
     public void removeBlack() {
         for (int i = 0; i < words.size(); i++){
@@ -115,38 +127,63 @@ public class Calculations {
         }
     }
 
-
     public void calculateEntropy(){
-
-        for(int i = 0; i < calcList.size(); i++){
-            calcList.clear();
-            calcList.addAll(words);
-
-
+        for(int i = 0; i < words.size(); i++){
+            calculateAllBits(words.get(i));
+            System.out.println("entropy of " + words.get(i) + ": ");
         }
     }
 
-    public Float calculateAllBits(String word){
-        char[] wordChars = word.toCharArray();
-        List<Float> bitList = new ArrayList<>();
-        float sum = 0.0f;
-        float entropy;
-        double probability;
+    public Float calculateAllBits(String guess) {
+        if (words == null || words.isEmpty()) return 0.0f;
 
+        HashMap<String, Integer> patternCounts = new HashMap<>();
 
-        for(int i = 0; i < Math.pow(3, 5); i++){
-
-
-            probability = (double) calcList.size() / words.size();
-            bitList.add((float) (-1 * (Math.log(probability) / Math.log(2))));
+        for (String candidate : words) {
+            String pattern = feedbackPattern(guess, candidate);
+            patternCounts.put(pattern, patternCounts.getOrDefault(pattern, 0) + 1);
         }
 
-        for(float num : bitList){
-            sum += num;
-        }
-        entropy = sum / (float) bitList.size();
+        double entropy = 0.0;
+        int total = words.size();
 
-        return entropy;
+        for (int count : patternCounts.values()) {
+            double p = (double) count / total;
+            entropy += -p * (Math.log(p) / Math.log(2));
+        }
+
+        return (float) entropy;
+    }
+
+    private String feedbackPattern(String guess, String answer) {
+        char[] g = guess.toCharArray();
+        char[] a = answer.toCharArray();
+        char[] res = {'B', 'B', 'B', 'B', 'B'};
+
+        int[] freq = new int[26];
+        for (int i = 0; i < 5; i++) {
+            freq[a[i] - 'A']++;
+        }
+
+        // Greens
+        for (int i = 0; i < 5; i++) {
+            if (g[i] == a[i]) {
+                res[i] = 'G';
+                freq[g[i] - 'A']--;
+            }
+        }
+
+        // Yellows
+        for (int i = 0; i < 5; i++) {
+            if (res[i] == 'G') continue;
+            int idx = g[i] - 'A';
+            if (idx >= 0 && idx < 26 && freq[idx] > 0) {
+                res[i] = 'Y';
+                freq[idx]--;
+            }
+        }
+
+        return new String(res);
     }
 
     public void calculateProbability(){

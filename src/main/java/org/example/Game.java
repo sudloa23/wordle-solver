@@ -23,38 +23,41 @@ public class Game{
     private int fourCounter = 1;
     private HashMap<Integer, Letter> letters = new HashMap<>();
     private HashMap<Character, DisplayLetter> displayLetters = new HashMap<>();
+    private Calculations calculations;
 
     public Game(){
         initGame();
     }
 
     public void initGame(){
-        InputStream is = Game.class.getResourceAsStream("/words.txt");
-        Path path = Paths.get("C:\\Users\\loren\\OneDrive\\Dokumente\\wordle\\src\\main\\resources\\answers.txt");
-        try {
-            BufferedReader br = Files.newBufferedReader(path);
+        System.out.println("Resource URL: " + Game.class.getResource("/answers.txt"));
+        InputStream is = Game.class.getResourceAsStream("/answers.txt");
+        if (is == null) {
+            throw new RuntimeException("words.txt not found (is null). Liegt sie wirklich in src/main/resources ?");
+        }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
             String line;
-            while((line = br.readLine()) != null){
-                allWords.add(line);
+            while ((line = br.readLine()) != null) {
+                allWords.add(line.trim());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
         InputStream is2 = Game.class.getResourceAsStream("/possible_guesses.txt");
-        Path path2 = Paths.get("C:\\Users\\loren\\OneDrive\\Dokumente\\wordle\\src\\main\\resources\\possible_guesses.txt");
-        try{
-            BufferedReader br = new BufferedReader(new InputStreamReader(is2));
+        if (is2 == null) {
+            throw new RuntimeException("possible_guesses.txt not found (is null). Liegt sie wirklich in src/main/resources ?");
+        }
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is2, StandardCharsets.UTF_8))) {
             String line;
-            while((line = br.readLine()) != null){
-                possibleWords.add(line.toUpperCase());
+            while ((line = br.readLine()) != null) {
+                possibleWords.add(line.trim().toUpperCase());
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-
-        word = allWords.get(ThreadLocalRandom.current().nextInt(1, 1692)).toCharArray();
+        word = allWords.get(ThreadLocalRandom.current().nextInt(allWords.size())).toCharArray();
 
         cells = new ArrayList<>();
         for(int i = 0; i < cellAmount; i++){
@@ -156,5 +159,10 @@ public class Game{
 
     public HashMap<Integer, Letter> getLetters(){
         return letters;
+    }
+
+    public void setCalc(Calculations calculations){
+        this.calculations = calculations;
+        this.calculations.calculateEntropy();
     }
 }

@@ -10,8 +10,6 @@ public class Main {
         PaintArea paintArea = new PaintArea(game);
         Frame frame = new Frame(paintArea);
         frame.setVisible(true);
-        Calculations calculations = new Calculations();
-
 
         paintArea.requestFocusInWindow();
     }

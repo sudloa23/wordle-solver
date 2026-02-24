@@ -12,6 +12,7 @@ public class Frame extends JFrame{
 
     public Frame(PaintArea paintArea){
         this.paintArea = paintArea;
+        //paintArea.setCalcForGame(calculations);
 
         setTitle(Title);
         setSize(width,height);
@@ -22,8 +23,6 @@ public class Frame extends JFrame{
         Timer timer = new Timer(20, (e -> paintArea.repaint()));
 
         timer.start();
-
-
 
         Timer timer1 = new Timer(20, (e -> {
             calculations.updateLetters(paintArea.getGame().getLetters());

@@ -60,4 +60,8 @@ public class PaintArea extends JPanel{
     public Game getGame(){
         return game;
     }
+
+    public void setCalcForGame(Calculations calc){
+        game.setCalc(calc);
+    }
 }
