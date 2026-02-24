@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="calculate top5 entropy">
+    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="visualise top5 entropy guesses">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +112,7 @@
       <workItem from="1771431032403" duration="1046000" />
       <workItem from="1771829534878" duration="9624000" />
       <workItem from="1771843726260" duration="150000" />
-      <workItem from="1771915642438" duration="15226000" />
+      <workItem from="1771915642438" duration="16206000" />
     </task>
     <task id="LOCAL-00001" summary="visuallisation + logic fixes">
       <option name="closed" value="true" />
@@ -211,7 +210,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771929889755</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="visualise top5 entropy guesses">
+      <option name="closed" value="true" />
+      <created>1771931685588</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1771931685588</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,7 +241,8 @@
     <MESSAGE value="+ entropy calculation (on the same thread takes a while)" />
     <MESSAGE value="win function (still slow)" />
     <MESSAGE value="calculate top5 entropy" />
-    <option name="LAST_COMMIT_MESSAGE" value="calculate top5 entropy" />
+    <MESSAGE value="visualise top5 entropy guesses" />
+    <option name="LAST_COMMIT_MESSAGE" value="visualise top5 entropy guesses" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

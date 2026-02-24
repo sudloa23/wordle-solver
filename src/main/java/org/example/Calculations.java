@@ -171,12 +171,17 @@ public class Calculations {
         return (float) entropy;
     }
 
+    private int[] freq = new int[26];
+
     private String feedbackPattern(String guess, String answer) {
         char[] g = guess.toCharArray();
         char[] a = answer.toCharArray();
         char[] res = {'B', 'B', 'B', 'B', 'B'};
 
-        int[] freq = new int[26];
+        for (int i = 0; i < freq.length; i++) {
+            freq[i] = 0;
+        }
+
         for (int i = 0; i < 5; i++) {
             freq[a[i] - 'A']++;
         }
