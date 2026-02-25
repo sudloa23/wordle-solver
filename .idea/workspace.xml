@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="gabby optimisation">
+    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="working entropy calculation + updating side bar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Frame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +113,7 @@
       <workItem from="1771431032403" duration="1046000" />
       <workItem from="1771829534878" duration="9624000" />
       <workItem from="1771843726260" duration="150000" />
-      <workItem from="1771915642438" duration="18345000" />
+      <workItem from="1771915642438" duration="25011000" />
     </task>
     <task id="LOCAL-00001" summary="visuallisation + logic fixes">
       <option name="closed" value="true" />
@@ -228,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771932840986</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="working entropy calculation + updating side bar">
+      <option name="closed" value="true" />
+      <created>1771934937497</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1771934937497</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,7 +260,8 @@
     <MESSAGE value="calculate top5 entropy" />
     <MESSAGE value="visualise top5 entropy guesses" />
     <MESSAGE value="gabby optimisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="gabby optimisation" />
+    <MESSAGE value="working entropy calculation + updating side bar" />
+    <option name="LAST_COMMIT_MESSAGE" value="working entropy calculation + updating side bar" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

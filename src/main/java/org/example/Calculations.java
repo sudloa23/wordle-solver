@@ -72,12 +72,13 @@ public class Calculations {
     }
 
     public void removeBlack() {
+        System.out.println("romoved all invalid words due to black letters");
         for (int i = 0; i < words.size(); i++){
             String w = words.get(i);
 
             for (int j = 0; j < blackLetters.size(); j++) {
                 if (w.contains(String.valueOf(blackLetters.get(j)))) {
-                    System.out.println("removed black: " + w);
+
                     words.remove(i);
                     i--;
                     break;
@@ -87,6 +88,7 @@ public class Calculations {
     }
 
     public void removeYellow() {
+        System.out.println("romoved all invalid words due to yellow letters");
         for (int i = 0; i < words.size(); i++) {
             String w = words.get(i);
             boolean remove = false;
@@ -105,7 +107,6 @@ public class Calculations {
             }
 
             if(remove){
-                System.out.println("removed yellow "+ letter + ": " + w);
                 words.remove(i);
                 i--;
             }
@@ -113,6 +114,7 @@ public class Calculations {
     }
 
     public void removeGreen(){
+        System.out.println("removed all invalid words due to green letters");
         for (int i = 0; i < words.size(); i++) {
             String w = words.get(i);
             boolean remove = false;
@@ -125,7 +127,6 @@ public class Calculations {
             }
 
             if(remove){
-                System.out.println("remove green: " + w);
                 words.remove(i);
             }
         }
@@ -140,7 +141,6 @@ public class Calculations {
         float entropy;
         for(int i = 0; i < words.size(); i++){
             entropy = calculateAllBits(words.get(i));
-            System.out.println("entropy of " + words.get(i) + ": " + entropy);
             entropies.put(words.get(i), entropy);
         }
         Map.Entry<String, Float> maxEntry = Collections.max(entropies.entrySet(), Map.Entry.comparingByValue());
@@ -150,7 +150,7 @@ public class Calculations {
             top5str.add(entry.getKey());
             top5flo.add(entry.getValue());
         }
-
+        System.out.println("all entropies calculated");
         System.out.println("highest Entropy: " + maxEntry.getKey() + " - " + maxEntry.getValue());
     }
 
@@ -182,7 +182,7 @@ public class Calculations {
         char[] a = answer.toCharArray();
         char[] res = {'B', 'B', 'B', 'B', 'B'};
 
-        for (int i = 0; i < freq.length; i++) {
+        for (int i = 0; i < freq.length; i++){
             freq[i] = 0;
         }
 
@@ -237,6 +237,7 @@ public class Calculations {
 
     public void draw(Graphics2D g2d){
         g2d.setColor(Color.BLACK);
+        g2d.drawString("Entropy:", 750, 150);
         for(int i = 0; i < top5.size(); i++){
             g2d.drawString(String.valueOf(top5str.get(i) + " -- " + top5flo.get(i)), 750, (i*50)+ 200);
         }

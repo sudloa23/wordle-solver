@@ -94,17 +94,20 @@ public class Game{
     }
 
     public void handleKey(KeyEvent e){
-        if(win == false) {
+        if(!win) {
             if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
-                int rowStart = (currentCellIndex / 5) * 5;
-                int rowEnd = rowStart + 5;
+                int rowStart = ((currentCellIndex / 5) * 5);
+                int rowEnd = (rowStart + 4);
 
-                for (int i = rowEnd; i >= rowStart; i--) {
+                for (int i = rowEnd; i >= rowStart; i--){
+                    System.out.println("trying to delete " + i);
                     if (cells.get(i).getInputLetter() != ' ') {
+                        System.out.println(i + " deleted");
                         cells.get(i).setInputLetter(' ');
                         if (currentCellIndex != rowStart) {
                             currentCellIndex--;
                         }
+
                         return;
                     }
                 }
@@ -184,13 +187,6 @@ public class Game{
     }
 
     public boolean checkWin(int start, int end){
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("cell " + start + ": " + cells.get(start).getAnswerIdentifier());
-        System.out.println("cell " + (start+1) + ": " + cells.get(start+1).getAnswerIdentifier());
-        System.out.println("cell " + (start+2) + ": " + cells.get(start+2).getAnswerIdentifier());
-        System.out.println("cell " + (start+3) + ": " + cells.get(start+3).getAnswerIdentifier());
-        System.out.println("cell " + (end-1) + ": " + cells.get(end-1).getAnswerIdentifier());
-
         if(cells.get(start).getAnswerIdentifier() == 'g'
         && cells.get(start+1).getAnswerIdentifier() == 'g'
         && cells.get(start+2).getAnswerIdentifier() == 'g'
@@ -198,6 +194,7 @@ public class Game{
         && cells.get(end-1).getAnswerIdentifier() == 'g'){
             win = true;
             System.out.println("you won");
+            possibleWords.clear();
         }
 
         return false;
