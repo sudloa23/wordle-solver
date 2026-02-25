@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="working entropy calculation + updating side bar">
+    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="fixed delete bug nr1 (issue2)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Game.java" afterDir="false" />
@@ -113,7 +113,7 @@
       <workItem from="1771431032403" duration="1046000" />
       <workItem from="1771829534878" duration="9624000" />
       <workItem from="1771843726260" duration="150000" />
-      <workItem from="1771915642438" duration="25011000" />
+      <workItem from="1771915642438" duration="26924000" />
     </task>
     <task id="LOCAL-00001" summary="visuallisation + logic fixes">
       <option name="closed" value="true" />
@@ -235,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1771934937497</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fixed delete bug nr1 (issue2)">
+      <option name="closed" value="true" />
+      <created>1772008678803</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1772008678803</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,7 +269,8 @@
     <MESSAGE value="visualise top5 entropy guesses" />
     <MESSAGE value="gabby optimisation" />
     <MESSAGE value="working entropy calculation + updating side bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="working entropy calculation + updating side bar" />
+    <MESSAGE value="fixed delete bug nr1 (issue2)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed delete bug nr1 (issue2)" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

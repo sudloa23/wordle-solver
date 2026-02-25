@@ -231,7 +231,6 @@ public class Calculations {
     }
 
     public void removeWord(String word){
-        System.out.println("removed word: " + word);
         words.remove(word);
     }
 

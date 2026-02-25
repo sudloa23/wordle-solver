@@ -100,13 +100,9 @@ public class Game{
                 int rowEnd = (rowStart + 4);
 
                 for (int i = rowEnd; i >= rowStart; i--){
-                    System.out.println("trying to delete " + i);
                     if (cells.get(i).getInputLetter() != ' ') {
-                        System.out.println(i + " deleted");
                         cells.get(i).setInputLetter(' ');
-                        if (currentCellIndex != rowStart) {
-                            currentCellIndex--;
-                        }
+                        currentCellIndex = i;
 
                         return;
                     }
