@@ -169,6 +169,19 @@ public class Game{
         }
     }
 
+    public void reset(){
+        for(int i = 0; i < cells.size(); i++){
+            cells.get(i).setInputLetter(' ');
+        }
+        allWords.clear();
+        possibleWords.clear();
+        win = false;
+        currentCellIndex = 0;
+
+        calculations.reset();
+        initGame();
+    }
+
     public List<Cell> getCells(){
         return cells;
     }

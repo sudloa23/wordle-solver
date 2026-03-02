@@ -7,7 +7,7 @@ public class Frame extends JFrame{
     private int width =1000;
     private String Title = "wordle";
     private Calculations calculations = new Calculations();
-
+    private Timer timer;
     private PaintArea paintArea;
 
     public Frame(PaintArea paintArea){
@@ -20,8 +20,13 @@ public class Frame extends JFrame{
 
         add(paintArea);
 
-        Timer timer = new Timer(20, (e -> paintArea.repaint()));
+        timer = new Timer(20, (e -> paintArea.repaint()));
+        timer.start();
+    }
 
+    public void restartgame(){
+        timer.stop();
+        paintArea.getGame().reset();
         timer.start();
     }
 }

@@ -9,8 +9,8 @@ public class Main {
         Game game = new Game();
         PaintArea paintArea = new PaintArea(game);
         Frame frame = new Frame(paintArea);
+        paintArea.setFrame(frame);
         frame.setVisible(true);
-
         paintArea.requestFocusInWindow();
     }
 }

@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 
 public class PaintArea extends JPanel{
     Game game;
+    Frame frame;
 
     public PaintArea(Game game){
         super();
@@ -37,6 +38,11 @@ public class PaintArea extends JPanel{
                 if(Character.isLetter(keyChar)){
                     game.handleKey(e);
                 }
+
+                if(keyCode == KeyEvent.VK_ESCAPE){
+                    frame.restartgame();
+
+                }
             }
 
             @Override
@@ -44,6 +50,10 @@ public class PaintArea extends JPanel{
 
             }
         });
+    }
+
+    public void setFrame(Frame frame){
+        this.frame = frame;
     }
 
     @Override

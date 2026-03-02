@@ -25,6 +25,10 @@ public class Calculations {
     private List<Float> top5flo = new ArrayList<>(5);
 
     public Calculations(){
+        init();
+    }
+
+    public void init(){
         InputStream is = Calculations.class.getResourceAsStream("/possible_guesses.txt");
         Path path = Paths.get("C:\\Users\\loren\\OneDrive\\Dokumente\\wordle\\src\\main\\resources\\possible_guesses.txt");
 
@@ -88,7 +92,7 @@ public class Calculations {
     }
 
     public void removeYellow() {
-        System.out.println("romoved all invalid words due to yellow letters");
+        System.out.println("removed all invalid words due to yellow letters");
         for (int i = 0; i < words.size(); i++) {
             String w = words.get(i);
             boolean remove = false;
@@ -143,6 +147,7 @@ public class Calculations {
             entropy = calculateAllBits(words.get(i));
             entropies.put(words.get(i), entropy);
         }
+
         Map.Entry<String, Float> maxEntry = Collections.max(entropies.entrySet(), Map.Entry.comparingByValue());
 
         top5 = entropies.entrySet().stream().sorted(Map.Entry.<String, Float>comparingByValue().reversed()).limit(5).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
@@ -240,5 +245,21 @@ public class Calculations {
         for(int i = 0; i < top5.size(); i++){
             g2d.drawString(String.valueOf(top5str.get(i) + " -- " + top5flo.get(i)), 750, (i*50)+ 200);
         }
+    }
+
+    public void reset(){
+        top5str.clear();
+        top5flo.clear();
+        top5.clear();
+        entropies.clear();
+        calcList.clear();
+        yellowLetters.clear();
+        blackLetters.clear();
+        greenLetters.clear();
+        words.clear();
+        letters.clear();
+        allPatterns.clear();
+        init();
+        calculateEntropy();
     }
 }
