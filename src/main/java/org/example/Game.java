@@ -204,6 +204,7 @@ public class Game{
             win = true;
             System.out.println("you won");
             possibleWords.clear();
+            calculations.clearAll();
         }
 
         return false;

@@ -23,12 +23,16 @@ public class Calculations {
     private HashMap<String, Float> top5 = new HashMap<>();
     private List<String> top5str = new ArrayList<>(5);
     private List<Float> top5flo = new ArrayList<>(5);
+    private List<String> allWords = new ArrayList<>();
+
 
     public Calculations(){
         init();
     }
 
     public void init(){
+        allWords.clear();
+
         InputStream is = Calculations.class.getResourceAsStream("/possible_guesses.txt");
         Path path = Paths.get("C:\\Users\\loren\\OneDrive\\Dokumente\\wordle\\src\\main\\resources\\possible_guesses.txt");
 
@@ -36,15 +40,18 @@ public class Calculations {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line;
             while((line = br.readLine()) != null){
-                words.add(line.toUpperCase());
+                allWords.add(line.toUpperCase());
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+        words = new ArrayList<>(allWords);
+
         for(char ch = 'A'; ch <= 'Z'; ch++){
             letters.put(ch, new Letter(ch));
         }
+        System.out.println("all words added to calcList");
         calcList.addAll(words);
         char[] states = {'B', 'Y', 'G'};
 
@@ -242,24 +249,33 @@ public class Calculations {
     public void draw(Graphics2D g2d){
         g2d.setColor(Color.BLACK);
         g2d.drawString("Entropy:", 750, 150);
+        g2d.drawString("guess words left: " + words.size(), 850, 150);
         for(int i = 0; i < top5.size(); i++){
             g2d.drawString(String.valueOf(top5str.get(i) + " -- " + top5flo.get(i)), 750, (i*50)+ 200);
         }
     }
 
     public void reset(){
-        top5str.clear();
-        top5flo.clear();
-        top5.clear();
-        entropies.clear();
-        calcList.clear();
+        top5str = new ArrayList<>();
+        top5flo = new ArrayList<>();
+        top5 = new HashMap<>();
+
+        entropies = new HashMap<>();
+        calcList = new ArrayList<>();
+
         yellowLetters.clear();
         blackLetters.clear();
         greenLetters.clear();
-        words.clear();
-        letters.clear();
-        allPatterns.clear();
+
+        words = new ArrayList<>(allWords);
+        letters = new HashMap<>();
+        allPatterns = new ArrayList<>();
         init();
         calculateEntropy();
+    }
+
+    public void clearAll(){
+        top5.clear();
+        words.clear();
     }
 }
