@@ -118,6 +118,7 @@ public class Game{
                 }
                 String guess = sb.toString();
                 guess = guess.toUpperCase();
+                System.out.println("word " + guess + " was guessed");
 
                 if (!possibleWords.contains(guess)) {
                     System.out.println("not a word: " + guess);
@@ -157,6 +158,7 @@ public class Game{
                 calculations.calculateEntropy();
 
                 currentCellIndex++;
+
                 return;
             } else if (currentCellIndex % 5 == 4 && e.getKeyCode() != KeyEvent.VK_ENTER) {
                 cells.get(currentCellIndex).update(e);
@@ -170,6 +172,7 @@ public class Game{
     }
 
     public void reset(){
+        System.out.println("reset game");
         for(int i = 0; i < cells.size(); i++){
             cells.get(i).setInputLetter(' ');
         }

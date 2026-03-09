@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="added reset function (extremely slow)">
+    <list default="true" id="2fa63368-47d8-4ad8-a7df-0e1167a9cfb7" name="Changes" comment="routine maintanance and small bug fixes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Calculations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,6 +122,9 @@
       <workItem from="1772521470376" duration="254000" />
       <workItem from="1772521731077" duration="2361000" />
       <workItem from="1772610894065" duration="2794000" />
+      <workItem from="1772720601444" duration="284000" />
+      <workItem from="1772779136022" duration="795000" />
+      <workItem from="1773038928703" duration="3321000" />
     </task>
     <task id="LOCAL-00001" summary="visuallisation + logic fixes">
       <option name="closed" value="true" />
@@ -266,7 +270,15 @@
       <option name="project" value="LOCAL" />
       <updated>1772448184805</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="routine maintanance and small bug fixes">
+      <option name="closed" value="true" />
+      <created>1772720819103</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1772720819103</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,7 +307,8 @@
     <MESSAGE value="fixed delete bug nr1 (issue2)" />
     <MESSAGE value="fixed delete bug nr2 weird delete thing" />
     <MESSAGE value="added reset function (extremely slow)" />
-    <option name="LAST_COMMIT_MESSAGE" value="added reset function (extremely slow)" />
+    <MESSAGE value="routine maintanance and small bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="routine maintanance and small bug fixes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

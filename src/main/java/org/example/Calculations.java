@@ -24,6 +24,9 @@ public class Calculations {
     private List<String> top5str = new ArrayList<>(5);
     private List<Float> top5flo = new ArrayList<>(5);
     private List<String> allWords = new ArrayList<>();
+    private Set<Character> greenChars = new HashSet<>();
+    private Set<Character> yellowChars = new HashSet<>();
+    private Set<Character> blackChars = new HashSet<>();
 
 
     public Calculations(){
@@ -83,34 +86,37 @@ public class Calculations {
     }
 
     public void removeBlack() {
-        System.out.println("romoved all invalid words due to black letters");
+
         for (int i = 0; i < words.size(); i++){
             String w = words.get(i);
 
             for (int j = 0; j < blackLetters.size(); j++) {
                 if (w.contains(String.valueOf(blackLetters.get(j)))) {
-
+                    blackChars.add(blackLetters.get(j));
                     words.remove(i);
                     i--;
                     break;
                 }
             }
         }
+        System.out.println("romoved all invalid words due to black letters: " + blackChars);
+        blackChars.clear();
     }
 
     public void removeYellow() {
-        System.out.println("removed all invalid words due to yellow letters");
         for (int i = 0; i < words.size(); i++) {
             String w = words.get(i);
             boolean remove = false;
             char letter = '#';
 
             for (Letter l : yellowLetters.values()) {
-                if (yellowCheck(w.toCharArray(), l)) {
+                if (yellowCheck(w.toCharArray(), l)){
+                    yellowChars.add(l.getLetter());
                     letter = l.getLetter();
                     remove = true;
                     break;
                 }else if(!w.contains(String.valueOf(yellowLetters.get(l.getLetter()).getLetter()))){
+                    yellowChars.add(l.getLetter());
                     letter = l.getLetter();
                     remove = true;
                     break;
@@ -122,25 +128,32 @@ public class Calculations {
                 i--;
             }
         }
+        System.out.println("removed all invalid words due to yellow letters: " + yellowChars);
+        yellowChars.clear();
     }
 
     public void removeGreen(){
-        System.out.println("removed all invalid words due to green letters");
         for (int i = 0; i < words.size(); i++) {
             String w = words.get(i);
             boolean remove = false;
 
             for (Letter l : greenLetters.values()) {
-                if(!w.contains(String.valueOf(greenLetters.get(l.getLetter()).getLetter()))){
-                    remove = true;
-                    break;
+                for (Integer pos : l.getGreenPos()) {
+                    if (w.charAt(pos) != l.getLetter()){
+                        greenChars.add(l.getLetter());
+                        remove = true;
+                        break;
+                    }
                 }
             }
 
             if(remove){
                 words.remove(i);
+                i--;
             }
         }
+        System.out.println("removed all invalid words due to green letters: " + greenChars);
+        greenChars.clear();
     }
 
     public void calculateEntropy(){
@@ -155,15 +168,17 @@ public class Calculations {
             entropies.put(words.get(i), entropy);
         }
 
-        Map.Entry<String, Float> maxEntry = Collections.max(entropies.entrySet(), Map.Entry.comparingByValue());
+        if(!entropies.isEmpty()){
+            Map.Entry<String, Float> maxEntry = Collections.max(entropies.entrySet(), Map.Entry.comparingByValue());
+            System.out.println("highest Entropy: " + maxEntry.getKey() + " - " + maxEntry.getValue());
+        }
+
 
         top5 = entropies.entrySet().stream().sorted(Map.Entry.<String, Float>comparingByValue().reversed()).limit(5).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
         for(Map.Entry<String, Float> entry : top5.entrySet()){
             top5str.add(entry.getKey());
             top5flo.add(entry.getValue());
         }
-        System.out.println("all entropies calculated");
-        System.out.println("highest Entropy: " + maxEntry.getKey() + " - " + maxEntry.getValue());
     }
 
     public Float calculateAllBits(String guess){
@@ -256,26 +271,28 @@ public class Calculations {
     }
 
     public void reset(){
-        top5str = new ArrayList<>();
-        top5flo = new ArrayList<>();
-        top5 = new HashMap<>();
+        top5str.clear();
+        top5flo.clear();
+        top5.clear();
+        entropies.clear();
 
-        entropies = new HashMap<>();
-        calcList = new ArrayList<>();
-
-        yellowLetters.clear();
         blackLetters.clear();
         greenLetters.clear();
+        yellowLetters.clear();
 
         words = new ArrayList<>(allWords);
-        letters = new HashMap<>();
-        allPatterns = new ArrayList<>();
-        init();
+
+        letters.clear();
+        for (char ch = 'A'; ch <= 'Z'; ch++) {
+            letters.put(ch, new Letter(ch));
+        }
         calculateEntropy();
     }
 
     public void clearAll(){
         top5.clear();
-        words.clear();
+        top5str.clear();
+        top5flo.clear();
+        entropies.clear();
     }
 }
