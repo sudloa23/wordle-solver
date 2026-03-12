@@ -155,7 +155,8 @@ public class Game{
                 }
                 calculations.updateLetters(letters);
                 calculations.removeLetters();
-                calculations.calculateEntropy();
+                Thread thread = new Thread(calculations::calculateEntropy);
+                thread.start();
 
                 currentCellIndex++;
 
@@ -195,7 +196,8 @@ public class Game{
 
     public void setCalc(Calculations calculations){
         this.calculations = calculations;
-        this.calculations.calculateEntropy();
+        Thread thread = new Thread(calculations::calculateEntropy);
+        thread.start();
     }
 
     public boolean checkWin(int start, int end){

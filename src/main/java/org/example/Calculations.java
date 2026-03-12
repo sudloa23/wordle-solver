@@ -286,7 +286,7 @@ public class Calculations {
         for (char ch = 'A'; ch <= 'Z'; ch++) {
             letters.put(ch, new Letter(ch));
         }
-        calculateEntropy();
+        Thread thread = new Thread(this::calculateEntropy);
     }
 
     public void clearAll(){
