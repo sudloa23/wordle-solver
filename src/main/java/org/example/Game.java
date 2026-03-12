@@ -181,6 +181,7 @@ public class Game{
         possibleWords.clear();
         win = false;
         currentCellIndex = 0;
+        letters.clear();
 
         calculations.reset();
         initGame();

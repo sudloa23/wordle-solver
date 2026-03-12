@@ -157,11 +157,11 @@ public class Calculations {
     }
 
     public void calculateEntropy(){
+        System.out.println("started calculating entropy");
         top5str.clear();
         top5flo.clear();
         top5.clear();
         entropies.clear();
-        System.out.println("calculateEntropy called");
         float entropy;
         for(int i = 0; i < words.size(); i++){
             entropy = calculateAllBits(words.get(i));
@@ -179,6 +179,7 @@ public class Calculations {
             top5str.add(entry.getKey());
             top5flo.add(entry.getValue());
         }
+        System.out.println("finished calculating entropy \n List: ");
     }
 
     public Float calculateAllBits(String guess){
@@ -287,6 +288,7 @@ public class Calculations {
             letters.put(ch, new Letter(ch));
         }
         Thread thread = new Thread(this::calculateEntropy);
+        thread.start();
     }
 
     public void clearAll(){
